@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Hallo Welt</title>
+</head>
+<body>
+
+    <h1>Hallo Welt!</h1>
+    
+    <button onclick="testeApi()">Backend-API aufrufen</button>
+    
+    <pre id="output"></pre>
+
+    <script>
+        async function testeApi() {
+            const out = document.getElementById('output');
+            out.textContent = 'Lade...';
+            
+            const functionUrl = 'https://fn-dkphase2-api-caafg7ddarh6aqg9.germanywestcentral-01.azurewebsites.net/api/HttpTrigger1';
+
+            try {
+                const res = await fetch(functionUrl);
+                const data = await res.json();
+                out.textContent = JSON.stringify(data, null, 2);
+            } catch (err) {
+                out.textContent = 'Fehler: ' + err.message;
+            }
+        }
+    </script>
+
+</body>
+</html>
